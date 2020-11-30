@@ -5,7 +5,6 @@ import Header from './Header';
 import Calendar from './Calendar';
 import EventDisplay from './EventDisplay';
 import Footer from './Footer';
-import stockImage from './assets/medieval2.jpg';
 import './App.css';
 
 class App extends Component {
@@ -15,15 +14,27 @@ class App extends Component {
     this.state = {
       today: new Date(),
       chosenDate: new Date(),
-      images: [],
+      userClicked: false,
+      start: 0,
       events: [],
       favourites: []
     }
   }
 
-  setUserChosenDate(date) {
+  setUserChosenDate(date, clicked) {
     this.setState({
-      chosenDate: date
+      chosenDate: date,
+      userClicked: clicked
+    });
+  }
+
+  setUpDataBase() {
+    // Make reference to database
+    const dbRef = firebase.database().ref();
+    // Get data from database
+    let firebaseDataObj;
+    dbRef.on('value', (data) => {
+      firebaseDataObj = data.val();
     });
   }
 
@@ -36,25 +47,21 @@ class App extends Component {
       this.setState({
         events: response.data.data.Events
       });
-
     });
   }
-  
-  componentDidMount() {
-    // Make reference to database
-    const dbRef = firebase.database().ref();
-    // Get data from database
-    let firebaseDataObj;
-    dbRef.on('value', (data) => {
-      firebaseDataObj = data.val();
-    });
 
-    // API call
+  componentDidMount() {
+    this.setUpDataBase();
     this.apiCall();
   }
 
   componentDidUpdate() {
-    this.apiCall();
+    if (this.state.userClicked) {
+      this.apiCall();
+      this.setState({
+        userClicked: false
+      });
+    }
     // console.log(this.state.events)
     // axios({
     //   url: `${this.proxyUrl}https://en.wikipedia.org/w/api.php`,
@@ -87,25 +94,10 @@ class App extends Component {
         <Header date={ this.state.chosenDate }/>
         <section className="eventDisplay">
           <div className="wrapper">
-            {
-              this.state.events.map( (event, index) => {
-                const { text, year } = event;
-                if (index < 4) {
-                  return (
-                    <EventDisplay
-                      key={index}
-                      description={text}
-                      year={year}
-                      imageUrl={stockImage}
-                      altText=''
-                    />
-                  )
-                }
-              })
-            }
+            <EventDisplay events={this.state.events.slice(0,4)}/>
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
-        <Calendar onChange={ (date) => this.setUserChosenDate(date) }/>
+        <Calendar onChange={ (date, clicked) => this.setUserChosenDate(date, clicked) }/>
         <Footer/>
       </div> /* closing App */
     );

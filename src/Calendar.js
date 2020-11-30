@@ -10,13 +10,13 @@ class Calendar extends Component {
             today: new Date(),
             calendarDate: new Date(),
             userClicked: false,
+            checkbox: false,
             chosenDate: new Date(),
             daysInAWeek: daysInAWeek,
             savedDates: [],
             monthCalendar: []
         }
     }
-    
     fillCalendar(date) {
         const year = date.getFullYear();
         const month = date.getMonth();
@@ -81,6 +81,7 @@ class Calendar extends Component {
         const chosenDate = new Date(year, month, day);
         this.setState({
             userClicked: true,
+            checkbox: !this.state.checkbox,
             chosenDate: chosenDate
         });
     }
@@ -108,7 +109,15 @@ class Calendar extends Component {
             monthCalendar: this.fillCalendar(newChosenDate)
         });
     }
+    uncheckCheckbox() {
+        if (this.state.checkbox) {
+            this.setState({
+                checkbox: !this.state.checkbox
+            });
+        }
+    }
     reset() {
+        // this.uncheckCheckbox();
         this.setState({
             calendarDate: this.state.today,
             monthCalendar: this.fillCalendar(this.state.today)
@@ -122,11 +131,26 @@ class Calendar extends Component {
     }
 
     componentDidUpdate() {
+        this.uncheckCheckbox();
         if (this.state.userClicked) {
             this.setState({
                 userClicked: false
             })
-            this.props.onChange(this.state.chosenDate);
+            this.props.onChange(this.state.chosenDate, this.state.userClicked);
+        }
+    }
+
+    renderCheckbox() {
+        if (this.state.checkbox) {
+            return(
+                <input type="checkbox" name="calendar" id="calendar" checked
+                    onClick={() => this.reset()} />
+            )
+        } else {
+            return (
+                <input type="checkbox" name="calendar" id="calendar"
+                    onClick={() => this.reset()} />
+            )
         }
     }
     
@@ -138,8 +162,9 @@ class Calendar extends Component {
         return (
             <div className="calendar">
                 <label htmlFor="calendar" className="srOnly">Choose a day</label>
-                <input type="checkbox" name="calendar" id="calendar" 
-                       onClick={() => this.reset()} />
+                {
+                    this.renderCheckbox()
+                }
                 <div className="calendarIcon">
                     <p>{months[date.getMonth()]}</p>
                     <p>{date.getDate()}</p>
