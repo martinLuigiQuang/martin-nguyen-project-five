@@ -51,22 +51,25 @@ footer {
 /* EVENT DISPLAY ------------------------------------------ */
 .eventDisplay {
   width: 100vw;
+  position: absolute;
+  top: 125px;
 }
 
 .eventDisplay .wrapper{
-  height: calc(100vh - 210px);
+  height: calc(100vh - 250px);
   width: calc(100vw - 50px);
-  display: grid;
-  grid-template-columns: repeat(2, calc((100vw - 75px) / 2));
-  grid-template-rows: repeat(2, calc((100vw - 75px) / 2));
-  grid-column-gap: 25px;
-  grid-row-gap: 35px;
   margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.event {
+  display: grid;
 }
 
 .event img {
-  width: 100%;
-  height: 100%;
+  width: 50vw;
+  height: 50vw;
+  margin: 0 auto;
 }
 
 .eventDescription h3 {
@@ -74,7 +77,8 @@ footer {
 }
 
 .eventDescription p {
-  display: none;
+  text-align: left;
+  margin: 0 auto;
 }
 
 /* CALENDAR ------------------------------------------------*/

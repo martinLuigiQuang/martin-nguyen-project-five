@@ -62,41 +62,19 @@ class App extends Component {
         userClicked: false
       });
     }
-    // console.log(this.state.events)
-    // axios({
-    //   url: `${this.proxyUrl}https://en.wikipedia.org/w/api.php`,
-    //   method: `GET`,
-    //   responseType: `json`,
-    //   params: {
-    //     action: "query",
-    //     prop: "images",
-    //     titles: this.state.events[11].links[1]['title'],
-    //     format: "json"
-    //   }
-    // }).then((response) => {
-    //   const responsePages = response.data.query.pages;
-    //   for (let page in responsePages) {
-    //     const wikipediaImageFileName = responsePages[page][`images`][1][`title`]
-    //     const apiImageUrl = `https://en.wikipedia.org/wiki/${ wikipediaImageFileName }`;
-    //     console.log(apiImageUrl);
-    //   }
-    // });
-    // this.state.events.forEach( (event, index) => {
-    //   if (index === 0) {
-        
-    //   }
-    // });
   }
 
   render() {
     return (
       <div className="App">
         <Header date={ this.state.chosenDate }/>
+
         <section className="eventDisplay">
           <div className="wrapper">
-            <EventDisplay events={this.state.events.slice(0,4)}/>
+            <EventDisplay events={this.state.events.slice(0,1)}/>
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
+
         <Calendar onChange={ (date, clicked) => this.setUserChosenDate(date, clicked) }/>
         <Footer/>
       </div> /* closing App */

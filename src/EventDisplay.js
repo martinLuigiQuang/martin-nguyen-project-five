@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import stockImage from './assets/medieval2.jpg';
+import stockImage from './assets/medieval2.jpg'
 import axios from 'axios';
 
 class EventDisplay extends Component {
@@ -14,7 +14,7 @@ class EventDisplay extends Component {
         }
     }
 
-    checkYear(year) {
+    convertYear(year) {
         if (year > 0) {
             year = year + ' CE';
         } else if (year < 0) {
@@ -33,29 +33,16 @@ class EventDisplay extends Component {
             params: {
                 action: "query",
                 prop: "images",
-                titles: event.links[1]['title'],
+                titles: event.links[2]['title'],
                 format: "json",
                 formatversion: '2'
             }
         }).then((response) => {
-            const responsePages = response.data.query.pages;
-            const wikipediaImageFileName = responsePages[0]['images'][0]['title'];
-            const apiImageUrl = `https://en.wikipedia.org/wiki/${ wikipediaImageFileName }`;
-            const imageData = {
-                filename: wikipediaImageFileName,
-                image_page_url: apiImageUrl,
-                image_src: this.fetchImageSrc(wikipediaImageFileName)
-            }
-            
-            
-            // this.images.push(apiImageUrl);
-            // this.setState({
-            //     images: this.images
-            // })
-        });
+            const wikipediaImageFileName = response.data.query.pages[0]['images'][0]['title'];
+            this.imageSrcApiCall(event.year, wikipediaImageFileName);
+        }).catch( err => err );
     }
-
-    fetchImageSrc(filename) {
+    imageSrcApiCall(year, filename) {
         axios({
             url: `${this.proxyUrl}https://en.wikipedia.org/w/api.php`,
             method: 'GET',
@@ -69,8 +56,15 @@ class EventDisplay extends Component {
             }
         }).then((response) => {
             const imageUrl = response.data.query.pages[-1].imageinfo[0].url;
-            return imageUrl;
-        });
+            const imageUrlObj = {
+                year: year,
+                url: imageUrl
+            }
+            this.images.push(imageUrlObj);
+            this.setState({
+                images: this.images
+            });
+        }).catch( err => err );
     }
 
     componentDidMount() {
@@ -95,13 +89,15 @@ class EventDisplay extends Component {
         return (
             this.state.events.map( (event, index) => {
                 const { text, year } = event;
+                let imageUrl = this.state.images[0];
+                console.log(this.state.images[0])
                 const altText = '';
-                const checkedYear = this.checkYear(year);
+                const historicalYear = this.convertYear(year);
                 return (
                     <div key={index} className="event">
-                        <img src={this.state.images[index]} alt={altText} />
+                        <img src={imageUrl} alt={altText} />
                         <div className="eventDescription">
-                            <h3>{checkedYear}</h3>
+                            <h3>{historicalYear}</h3>
                             <p>{text}</p>
                         </div>
                     </div>
