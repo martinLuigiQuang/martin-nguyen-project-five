@@ -126,7 +126,7 @@ class Calendar extends Component {
             this.setState({
                 userClicked: false
             })
-            this.props.onChange(this.state.chosenDate);
+            this.props.onChange(this.state.chosenDate, this.state.userClicked);
         }
     }
     

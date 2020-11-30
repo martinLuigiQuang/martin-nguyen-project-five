@@ -15,15 +15,17 @@ class App extends Component {
     this.state = {
       today: new Date(),
       chosenDate: new Date(),
+      userClicked: false,
       images: [],
       events: [],
       favourites: []
     }
   }
 
-  setUserChosenDate(date) {
+  setUserChosenDate(date, clicked) {
     this.setState({
-      chosenDate: date
+      chosenDate: date,
+      userClicked: clicked
     });
   }
 
@@ -54,7 +56,12 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    this.apiCall();
+    if (this.state.userClicked) {
+      this.apiCall();
+      this.setState({
+        userClicked: false
+      });
+    }
     // console.log(this.state.events)
     // axios({
     //   url: `${this.proxyUrl}https://en.wikipedia.org/w/api.php`,
@@ -105,7 +112,7 @@ class App extends Component {
             }
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
-        <Calendar onChange={ (date) => this.setUserChosenDate(date) }/>
+        <Calendar onChange={ (date, clicked) => this.setUserChosenDate(date, clicked) }/>
         <Footer/>
       </div> /* closing App */
     );
