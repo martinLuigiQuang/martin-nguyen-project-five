@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import stockImage from './assets/medieval2.jpg'
+import stockImage from './assets/medieval2.jpg';
+import wing from './assets/wing.png';
 import axios from 'axios';
 
 class EventDisplay extends Component {
@@ -10,7 +11,8 @@ class EventDisplay extends Component {
         this.proxyUrl = `https://cors-anywhere.herokuapp.com/`;
         this.state = {
             events: [],
-            images: []
+            images: [],
+            userInput: 0
         }
     }
 
@@ -24,47 +26,20 @@ class EventDisplay extends Component {
         }
         return year;
     }
-
-    imageApiCall(event) {
-        axios({
-            url: `${this.proxyUrl}https://en.wikipedia.org/w/api.php`,
-            method: `GET`,
-            responseType: `json`,
-            params: {
-                action: "query",
-                prop: "images",
-                titles: event.links[2]['title'],
-                format: "json",
-                formatversion: '2'
-            }
-        }).then((response) => {
-            const wikipediaImageFileName = response.data.query.pages[0]['images'][0]['title'];
-            this.imageSrcApiCall(event.year, wikipediaImageFileName);
-        }).catch( err => err );
+    renderEventNav() {
+        return(
+            <div className="eventNav">
+                <img src={wing} alt="previous event" className="previousEvent"
+                     onClick={() => this.changeEvent(-1)} />
+                <img src={wing} alt="next event" className="nextEvent"
+                     onClick={() => this.changeEvent(1)} />
+            </div>
+        )
     }
-    imageSrcApiCall(year, filename) {
-        axios({
-            url: `${this.proxyUrl}https://en.wikipedia.org/w/api.php`,
-            method: 'GET',
-            responseType: 'json',
-            params: {
-                action: 'query',
-                format: 'json',
-                prop: 'imageinfo',
-                iiprop: 'url',
-                titles: filename
-            }
-        }).then((response) => {
-            const imageUrl = response.data.query.pages[-1].imageinfo[0].url;
-            const imageUrlObj = {
-                year: year,
-                url: imageUrl
-            }
-            this.images.push(imageUrlObj);
-            this.setState({
-                images: this.images
-            });
-        }).catch( err => err );
+    changeEvent(change) {
+        this.setState({
+            userInput: change
+        })
     }
 
     componentDidMount() {
@@ -78,9 +53,12 @@ class EventDisplay extends Component {
             this.events = this.props.events;
             this.setState({
                 events: this.props.events
-            })
-            this.events.forEach((event) => {
-                this.imageApiCall(event);
+            });
+        }
+        if (this.state.userInput) {
+            this.props.onChange(this.state.userInput);
+            this.setState({
+                userInput: 0
             });
         }
     }
@@ -89,8 +67,11 @@ class EventDisplay extends Component {
         return (
             this.state.events.map( (event, index) => {
                 const { text, year } = event;
-                let imageUrl = this.state.images[0];
-                console.log(this.state.images[0])
+                let checkedText = text;
+                if (text.charAt(text.length - 1) === ']') {
+                    checkedText = text.slice(0, text.length - 3);
+                }
+                let imageUrl = stockImage;
                 const altText = '';
                 const historicalYear = this.convertYear(year);
                 return (
@@ -98,8 +79,11 @@ class EventDisplay extends Component {
                         <img src={imageUrl} alt={altText} />
                         <div className="eventDescription">
                             <h3>{historicalYear}</h3>
-                            <p>{text}</p>
+                            <p>{checkedText}</p>
                         </div>
+                        {
+                            this.renderEventNav()
+                        }
                     </div>
                 )
             })

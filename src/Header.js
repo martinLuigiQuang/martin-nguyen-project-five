@@ -1,12 +1,16 @@
 import { months } from './calendarInfo';
+import baroqueFloral from './assets/baroqueFloral.png';
+import ovalFrame from './assets/ovalFrame.png';
 
 const Header = ( { date } ) => {
     const month = months[date.getMonth()];
     const day = date.getDate();
     return (
         <header>
-            <h1>This day in history</h1>
+            <img src={baroqueFloral} alt="Baroque Floral Motif" className="firstPiece"/>
+            <img src={baroqueFloral} alt="Baroque Floral Motif" className="secondPiece"/>
             <h3>{ month } { day }</h3>
+            <h1>In History</h1>
         </header> 
     )
 }

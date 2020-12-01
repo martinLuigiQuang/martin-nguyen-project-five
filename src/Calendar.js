@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { months, daysInAWeek } from './calendarInfo';
 import arrow from './assets/arrow.png';
-import wing from './assets/wing.png';
+import eyeOfHorus from './assets/eyeOfHorus.jpg';
+import parchment from './assets/parchment.png';
 
 class Calendar extends Component {
     constructor() {
@@ -133,10 +134,10 @@ class Calendar extends Component {
     componentDidUpdate() {
         this.uncheckCheckbox();
         if (this.state.userClicked) {
+            this.props.onChange(this.state.chosenDate, this.state.userClicked);
             this.setState({
                 userClicked: false
-            })
-            this.props.onChange(this.state.chosenDate, this.state.userClicked);
+            });
         }
     }
 
@@ -166,9 +167,9 @@ class Calendar extends Component {
                     this.renderCheckbox()
                 }
                 <div className="calendarIcon">
-                    <p>{months[date.getMonth()]}</p>
-                    <p>{date.getDate()}</p>
+                    <img src={eyeOfHorus} alt="select a date" />
                 </div>
+                <img src={parchment} alt="parchment background" className="parchment hidden"/>
                 <div className="calendarNav hidden">
                     <img src={ arrow } alt="previous month" className="leftArrow" 
                          onClick={ () => this.previousMonth(chosenYear, chosenMonth) }/>

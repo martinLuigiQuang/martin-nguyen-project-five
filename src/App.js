@@ -15,7 +15,7 @@ class App extends Component {
       today: new Date(),
       chosenDate: new Date(),
       userClicked: false,
-      start: 0,
+      eventIndex: 1,
       events: [],
       favourites: []
     }
@@ -24,7 +24,20 @@ class App extends Component {
   setUserChosenDate(date, clicked) {
     this.setState({
       chosenDate: date,
-      userClicked: clicked
+      userClicked: clicked,
+      eventIndex: 1
+    });
+  }
+
+  getNewEvent(change) {
+    let newEventIndex = this.state.eventIndex + change;
+    if (newEventIndex < 1) {
+      newEventIndex = 1;
+    } else if (newEventIndex > this.state.events.length) {
+      newEventIndex = this.state.events.length;
+    }
+    this.setState({
+      eventIndex: newEventIndex
     });
   }
 
@@ -71,7 +84,10 @@ class App extends Component {
 
         <section className="eventDisplay">
           <div className="wrapper">
-            <EventDisplay events={this.state.events.slice(0,1)}/>
+            <EventDisplay 
+              events={this.state.events.slice(this.state.eventIndex - 1, this.state.eventIndex)}
+              onChange={ (change) => this.getNewEvent(change) }  
+            />
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
 
