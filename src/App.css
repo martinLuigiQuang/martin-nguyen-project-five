@@ -42,20 +42,19 @@ header {
 
 header h1 {
   margin-top: 10px;
-  z-index: 1;
 }
 
 header h3 {
   margin-top: 50px;
-  z-index: 1;
   text-transform: uppercase;
 }
 
 header img {
   position: absolute;
   width: 240px;
-  top: -150px;
+  top: -95px;
   filter: hue-rotate(90deg);
+  z-index: 4;
 }
 
 .firstPiece {
@@ -78,6 +77,7 @@ footer {
   align-items: flex-end;
   width: 100vw;
   height: 50px;
+  z-index: 2;
 }
 
 footer p {
@@ -108,15 +108,19 @@ footer span .fa-cat {
   right: 5px;
 }
 
-.icons p {
+p.informationSymbol {
   position: fixed;
+  z-index: 21;
   top: 85px;
   right: 22px;
   color: whitesmoke;
   font-size: 2.2rem;
 }
 
-.event .informationIcon {
+.icons img.informationIcon {
+  position: fixed;
+  right: 5px;
+  z-index: 20;
   width: 40px;
   height: 40px;
 }
@@ -126,27 +130,43 @@ input#likeButton {
   position: absolute;
   width: 40px;
   height: 40px;
-  opacity: 0;
-  z-index: 1;
+  appearance: none;
+}
+
+input#moreInformation {
+  left: -40px;
+  z-index: 30;
 }
 
 input#likeButton {
-  left: 0px;
+  left: -8px;
+  top: -5px;
+  z-index: 1;
 }
 
 input#likeButton:checked ~ .liked {
   opacity: 1;
 }
 
+input#moreInformation:checked ~ .information {
+  display: flex;
+}
+
 .likeIcon {
-  position: relative;
+  position: fixed;
+  top: 130px;
+  right: 12px;
   font-size: 2.5rem;
+}
+
+.likeIcon .fa-heart {
+  z-index: 0;
 }
 
 .liked {
   opacity: 0;
   position: absolute;
-  left: 8px;
+  left: 0;
   color: tomato;
 }
 
@@ -175,6 +195,78 @@ input#likeButton:checked ~ .liked {
 .eventDescription p {
   text-align: left;
   margin: 0 auto;
+}
+
+.information {
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  top: 100px;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  display: none;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  background-color: wheat;
+  opacity: 1;
+}
+
+.information h3 {
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+.about {
+  display: flex;
+  flex-flow: column nowrap;
+  border-bottom: 5px solid whitesmoke;
+  padding-bottom: 25px;
+}
+
+.navigation {
+  padding-top: 25px;
+  width: calc(100vw - 50px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 10px;
+  padding-bottom: 100px;
+}
+
+.navigation h3 {
+  grid-column: 1/ span 3;
+}
+
+.navigation p:not(.likeButtonDescription) {
+  display: grid;
+  grid-template-rows: 1fr 1fr 3fr;
+  border-top: 2px solid goldenrod;
+  background: linear-gradient(gold, wheat);
+}
+
+.navigation img {
+  width: 80px;
+  height: 80px;
+  transform: none;
+}
+
+.navigation .previousEvent {
+  transform: rotateY(180deg);
+}
+
+.navigation .icon {
+  border: 5px solid gold;
+}
+
+.navigation .fa-heart {
+  font-size: 2.5rem;
+  color: tomato;
+}
+
+.likeButtonDescription {
+  grid-column: 2 / span 2;
+  text-align: left;
 }
 
 /* CALENDAR ------------------------------------------------*/
@@ -215,6 +307,11 @@ input#likeButton:checked ~ .liked {
   color: #282c34;
   flex-basis: 100px;
 }
+  
+.calendarNav button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
 
 .calendarNav img {
   width: 30px;
@@ -243,7 +340,6 @@ input#likeButton:checked ~ .liked {
 .calendarDisplay li {
   display: grid;
   align-content: center;
-  list-style: none;
   font-size: 2.2rem;
   height: calc((100vw - 60px) / 7);
 }
@@ -257,7 +353,7 @@ input#likeButton:checked ~ .liked {
   background-color: coral;
 }
 
-li.dayInMonth {
+button.dayInMonth {
   font-size: 2rem;
   grid-template-columns: repeat(2, 40%);
   justify-content: center;
@@ -265,30 +361,37 @@ li.dayInMonth {
   border-radius: 20%;
 }
 
-.calendarIcon img, 
+.calendarIcon img,
+.calendarIcon button, 
 input#calendar{
   width: 80px;
   height: 80px;
   left: calc(50% - 40px);
-  bottom: -15px;
-  position: absolute;
   border-radius: 10px;
+  z-index: 3;
+}
+
+.calendarIcon button {
+  border: none;
+  background-color: rgba(128, 128, 128, 0);
+}
+
+.calendarIcon button,
+input#calendar {
+  position: absolute;
+  bottom: -15px;
 }
 
 .previousEvent {
-  transform: translateX(-80px) rotateY(180deg);
+  transform: translateX(-90px) rotateY(180deg);
 }
 
 .nextEvent {
-  transform: translateX(80px);
+  transform: translateX(90px);
 }
 
-.calendarIcon .icon {
+.icon img {
   border: 5px solid gold;
-}
-
-.calendarIcon img {
-  z-index: 3;
 }
 
 input#calendar {
