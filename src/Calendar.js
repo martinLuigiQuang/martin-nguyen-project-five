@@ -3,6 +3,7 @@ import { months, daysInAWeek } from './calendarInfo';
 import arrow from './assets/arrow.png';
 import eyeOfHorus from './assets/eyeOfHorus.jpg';
 import parchment from './assets/parchment.png';
+import wingedBeing from './assets/wingedBeing.png';
 
 class Calendar extends Component {
     constructor() {
@@ -11,6 +12,7 @@ class Calendar extends Component {
             today: new Date(),
             calendarDate: new Date(),
             userClicked: false,
+            eventNav: 0,
             checkbox: false,
             chosenDate: new Date(),
             daysInAWeek: daysInAWeek,
@@ -110,6 +112,11 @@ class Calendar extends Component {
             monthCalendar: this.fillCalendar(newChosenDate)
         });
     }
+    changeEvent(change) {
+        this.setState({
+            eventNav: change
+        })
+    }
     uncheckCheckbox() {
         if (this.state.checkbox) {
             this.setState({
@@ -118,7 +125,6 @@ class Calendar extends Component {
         }
     }
     reset() {
-        // this.uncheckCheckbox();
         this.setState({
             calendarDate: this.state.today,
             monthCalendar: this.fillCalendar(this.state.today)
@@ -134,9 +140,15 @@ class Calendar extends Component {
     componentDidUpdate() {
         this.uncheckCheckbox();
         if (this.state.userClicked) {
-            this.props.onChange(this.state.chosenDate, this.state.userClicked);
+            this.props.onChange(this.state.chosenDate, this.state.userClicked, this.state.eventNav);
             this.setState({
                 userClicked: false
+            });
+        }
+        if (this.state.eventNav) {
+            this.props.onChange(this.state.chosenDate, this.state.userClicked, this.state.eventNav);
+            this.setState({
+                eventNav: 0
             });
         }
     }
@@ -154,9 +166,20 @@ class Calendar extends Component {
             )
         }
     }
+
+    renderCalendarIcon() {
+        return(
+            <div className="calendarIcon">
+                <img src={wingedBeing} alt="previous event" className="previousEvent"
+                    onClick={() => this.changeEvent(-1)} />
+                <img src={wingedBeing} alt="next event" className="nextEvent"
+                    onClick={() => this.changeEvent(1)} />
+                <img src={eyeOfHorus} alt="select a date" className="icon"/>
+            </div>
+        )
+    }
     
     render() {
-        const date = this.state.today;
         const chosenDate = this.state.calendarDate;
         const chosenYear = chosenDate.getFullYear();
         const chosenMonth = chosenDate.getMonth();
@@ -166,9 +189,9 @@ class Calendar extends Component {
                 {
                     this.renderCheckbox()
                 }
-                <div className="calendarIcon">
-                    <img src={eyeOfHorus} alt="select a date" />
-                </div>
+                {
+                    this.renderCalendarIcon()
+                }
                 <img src={parchment} alt="parchment background" className="parchment hidden"/>
                 <div className="calendarNav hidden">
                     <img src={ arrow } alt="previous month" className="leftArrow" 

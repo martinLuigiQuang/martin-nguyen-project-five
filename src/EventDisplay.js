@@ -1,21 +1,15 @@
 import { Component } from 'react';
 import stockImage from './assets/medieval2.jpg';
-import wing from './assets/wing.png';
-import axios from 'axios';
+import waxSeal from './assets/waxSeal.png';
+import wingedBeing from './assets/wingedBeing.png';
+import eyeOfHorus from './assets/eyeOfHorus.jpg';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as rHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as sHeart } from '@fortawesome/free-solid-svg-icons';
+library.add(rHeart, sHeart);
 
 class EventDisplay extends Component {
-    constructor() {
-        super();
-        this.events = [];
-        this.images = [];
-        this.proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-        this.state = {
-            events: [],
-            images: [],
-            userInput: 0
-        }
-    }
-
     convertYear(year) {
         if (year > 0) {
             year = year + ' CE';
@@ -26,64 +20,74 @@ class EventDisplay extends Component {
         }
         return year;
     }
-    renderEventNav() {
+    checkText(text) {
+        let checkedText = text;
+        if (text.charAt(text.length - 1) === ']') {
+            checkedText = text.slice(0, text.length - 3);
+        }
+        return checkedText;
+    }
+    renderInformationTab(heartIcon) {
         return(
-            <div className="eventNav">
-                <img src={wing} alt="previous event" className="previousEvent"
-                     onClick={() => this.changeEvent(-1)} />
-                <img src={wing} alt="next event" className="nextEvent"
-                     onClick={() => this.changeEvent(1)} />
+            <div className="information">
+                <div>
+                    <h3>About</h3>
+                    <p>A web development bootcamp project. Built with React and Firebase.</p>
+                </div>
+                <div>
+                    <h3>Navigation</h3>
+                    <p><span>previous</span><span>event</span></p>
+                    <p><span>open</span><span>calendar</span></p>
+                    <p><span>next</span><span>event</span></p>
+                    <img src={wingedBeing} alt="previous event" className="previousEvent"/>
+                    <img src={eyeOfHorus} alt="open calendar" className="icon"/>
+                    <img src={wingedBeing} alt="next event" className="nextEvent"/>
+                    <i>{heartIcon}</i>
+                    <p>Like and save an event</p>
+                </div>
             </div>
         )
     }
-    changeEvent(change) {
-        this.setState({
-            userInput: change
-        })
-    }
-
-    componentDidMount() {
-        this.setState({
-            events: this.props.events
-        })
-    }
-
-    componentDidUpdate() {
-        if (this.events !== this.props.events) {
-            this.events = this.props.events;
-            this.setState({
-                events: this.props.events
-            });
-        }
-        if (this.state.userInput) {
-            this.props.onChange(this.state.userInput);
-            this.setState({
-                userInput: 0
-            });
-        }
+    renderIcons() {
+        const fasHeart = <FontAwesomeIcon icon={sHeart} />;
+        const farHeart = <FontAwesomeIcon icon={rHeart} />;
+        return(
+            <div className="icons">
+                <label htmlFor="moreInformation" className="srOnly"></label>
+                <input type="checkbox" name="moreInformation" id="moreInformation"/>
+                {
+                    this.renderInformationTab(farHeart)
+                }
+                <img src={waxSeal} alt="more information" className="informationIcon"/>
+                <p className="information">i</p>
+                <div className="likeIcon">
+                    <label htmlFor="likeButton" className="srOnly"></label>
+                    <input type="checkbox" name="likeButton" id="likeButton"/>
+                    <i>{farHeart}</i>
+                    <i className="liked">{fasHeart}</i>
+                </div>
+            </div>
+        )
     }
 
     render() {
         return (
-            this.state.events.map( (event, index) => {
+            this.props.events.map( (event, index) => {
                 const { text, year } = event;
-                let checkedText = text;
-                if (text.charAt(text.length - 1) === ']') {
-                    checkedText = text.slice(0, text.length - 3);
-                }
+                const checkedText = this.checkText(text);
                 let imageUrl = stockImage;
                 const altText = '';
                 const historicalYear = this.convertYear(year);
                 return (
                     <div key={index} className="event">
+                        {
+                            this.renderIcons()
+                        }
                         <img src={imageUrl} alt={altText} />
                         <div className="eventDescription">
                             <h3>{historicalYear}</h3>
                             <p>{checkedText}</p>
                         </div>
-                        {
-                            this.renderEventNav()
-                        }
                     </div>
                 )
             })

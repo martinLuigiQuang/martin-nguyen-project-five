@@ -21,12 +21,13 @@ class App extends Component {
     }
   }
 
-  setUserChosenDate(date, clicked) {
+  setUserChosenDate(date, clicked, change) {
     this.setState({
       chosenDate: date,
       userClicked: clicked,
       eventIndex: 1
     });
+    this.getNewEvent(change);
   }
 
   getNewEvent(change) {
@@ -85,14 +86,13 @@ class App extends Component {
         <section className="eventDisplay">
           <div className="wrapper">
             <EventDisplay 
-              events={this.state.events.slice(this.state.eventIndex - 1, this.state.eventIndex)}
-              onChange={ (change) => this.getNewEvent(change) }  
+              events={this.state.events.slice(this.state.eventIndex - 1, this.state.eventIndex)}  
             />
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
 
-        <Calendar onChange={ (date, clicked) => this.setUserChosenDate(date, clicked) }/>
-        <Footer/>
+        <Calendar onChange={ (date, clicked, change) => this.setUserChosenDate(date, clicked, change) }/>
+        <Footer />
       </div> /* closing App */
     );
   }

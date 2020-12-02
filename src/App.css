@@ -85,6 +85,10 @@ footer p {
   padding-bottom: 10px;
 }
 
+footer span .fa-cat {
+  transform: rotateY(180deg);
+}
+
 /* EVENT DISPLAY ------------------------------------------ */
 .eventDisplay {
   width: 100vw;
@@ -96,6 +100,54 @@ footer p {
   height: calc(100vh - 250px);
   width: calc(100vw - 50px);
   margin: 0 auto;
+}
+
+.icons {
+  position: fixed;
+  top: 80px;
+  right: 5px;
+}
+
+.icons p {
+  position: fixed;
+  top: 85px;
+  right: 22px;
+  color: whitesmoke;
+  font-size: 2.2rem;
+}
+
+.event .informationIcon {
+  width: 40px;
+  height: 40px;
+}
+
+input#moreInformation,
+input#likeButton {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  z-index: 1;
+}
+
+input#likeButton {
+  left: 0px;
+}
+
+input#likeButton:checked ~ .liked {
+  opacity: 1;
+}
+
+.likeIcon {
+  position: relative;
+  font-size: 2.5rem;
+}
+
+.liked {
+  opacity: 0;
+  position: absolute;
+  left: 8px;
+  color: tomato;
 }
 
 .event {
@@ -125,34 +177,10 @@ footer p {
   margin: 0 auto;
 }
 
-.eventNav {
-  position: fixed;
-  width: 100vw;
-  bottom: 40px;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  z-index: 3;
-}
-
-.eventNav img {
-  width: 50vw;
-  height: 20vw;
-  margin: 0;
-}
-
-.previousEvent {
-  transform: translateX(-10px);
-}
-
-.nextEvent {
-  transform: translateX(10px) rotateY(180deg);
-}
-
 /* CALENDAR ------------------------------------------------*/
 .calendar {
   width: 100vw;
-  height: 0px;
+  height: 0;
   position: absolute;
   bottom: 50px;
 }
@@ -185,6 +213,7 @@ footer p {
 
 .calendarNav h3 {
   color: #282c34;
+  flex-basis: 100px;
 }
 
 .calendarNav img {
@@ -246,6 +275,18 @@ input#calendar{
   border-radius: 10px;
 }
 
+.previousEvent {
+  transform: translateX(-80px) rotateY(180deg);
+}
+
+.nextEvent {
+  transform: translateX(80px);
+}
+
+.calendarIcon .icon {
+  border: 5px solid gold;
+}
+
 .calendarIcon img {
   z-index: 3;
 }
@@ -303,12 +344,14 @@ input#calendar:checked ~ .hidden {
   .eventDisplay .wrapper {
     height: calc(100vh - 375px);
   }
+  .calendar {
+    height: 80px;
+    background-image: url('./assets/hieroglyphics.jpg');
+    background-size: contain;
+  }
   .calendarIcon img,
   input#calendar {
-    bottom: 50px;
-  }
-  .eventNav {
-    bottom: 100px;
+    bottom: 80px;
   }
   .parchment {
     top: 150px;
@@ -326,10 +369,6 @@ input#calendar:checked ~ .hidden {
   header img {
     width: 250px;
   }
-  /* .calendarIcon img,
-  input#calendar {
-    bottom: -10px;
-  } */
   .parchment {
     left: -20px;
   }
@@ -352,7 +391,7 @@ input#calendar:checked ~ .hidden {
     width: 150px;
     height: 150px;
     left: calc(50% - 75px);
-    bottom: 60px;
+    bottom: 100px;
   }
 }
 
