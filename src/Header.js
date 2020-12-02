@@ -1,6 +1,5 @@
 import { months } from './calendarInfo';
 import baroqueFloral from './assets/baroqueFloral.png';
-import ovalFrame from './assets/ovalFrame.png';
 
 const Header = ( { date } ) => {
     const month = months[date.getMonth()];
