@@ -14,18 +14,17 @@ class App extends Component {
     this.state = {
       today: new Date(),
       chosenDate: new Date(),
-      userClicked: false,
+      aDateIsPicked: false,
       eventIndex: 1,
       events: [],
       favourites: []
     }
   }
 
-  setUserChosenDate(date, clicked, change) {
+  setUserChosenDate(date, picked, change) {
     this.setState({
       chosenDate: date,
-      userClicked: clicked,
-      eventIndex: 1
+      aDateIsPicked: picked
     });
     this.getNewEvent(change);
   }
@@ -70,10 +69,11 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.userClicked) {
+    if (this.state.aDateIsPicked) {
       this.apiCall();
       this.setState({
-        userClicked: false
+        aDateIsPicked: false,
+        eventIndex: 1
       });
     }
   }
@@ -91,7 +91,7 @@ class App extends Component {
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
 
-        <Calendar onChange={ (date, clicked, change) => this.setUserChosenDate(date, clicked, change) }/>
+        <Calendar onUserChange={ (date, picked, change) => this.setUserChosenDate(date, picked, change) }/>
         <Footer />
       </div> /* closing App */
     );

@@ -1,0 +1,66 @@
+.calendar {
+  width: 100vw;
+  height: 0;
+  position: absolute;
+  bottom: 50px;
+}
+
+.parchment {
+  position: fixed;
+  width: 110%;
+  height: 70%;
+  top: 110px;
+  left: -15px;
+}
+
+.calendarIcon img,
+.calendarIcon .icon,
+.calendarIcon button, 
+input#calendar{
+  width: 80px;
+  height: 80px;
+  left: calc(50% - 40px);
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.calendarIcon button {
+  border: none;
+  background-color: rgba(128, 128, 128, 0);
+}
+
+.icon,
+.calendarIcon button,
+input#calendar {
+  position: absolute;
+  bottom: -15px;
+}
+
+.previousEvent {
+  transform: translateX(-90px) rotateY(180deg);
+}
+
+.nextEvent {
+  transform: translateX(90px);
+}
+
+.icon img {
+  border: 5px solid gold;
+}
+
+input#calendar {
+  z-index: 4;
+  appearance: none;
+}
+
+input#calendar:checked {
+  width: 100vw;
+  height: 80px;
+  bottom: -15px;
+  left: 0;
+  z-index: 4;
+}
+
+input#calendar:checked ~ .hidden {
+  z-index: 1;
+}

@@ -1,0 +1,19 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #282c34;
+  color: whitesmoke;
+  width: 100vw;
+  height: 50px;
+  z-index: 2;
+}
+
+footer p {
+  font-size: 1.6rem;
+  padding-bottom: 5px;
+}
+
+footer span .fa-cat {
+  transform: rotateY(180deg);
+}

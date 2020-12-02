@@ -1,0 +1,52 @@
+@media (max-height: 567px) {
+  header, footer,
+  .eventDisplay, .calendar {
+    display: none;
+  }
+}
+
+@media (min-height: 570px) {
+  .eventDisplay {
+    top: 130px;
+  }
+  .calendarNav {
+    top: calc(170px - 100vh);
+  }
+  .calendarDisplay {
+    top: calc(225px - 100vh);
+  }
+}
+
+@media (min-height: 812px) {
+  header {
+    height: 125px;
+  }
+  header img {
+    width: 250px;
+  }
+  .eventDisplay {
+    top: 175px;
+  }
+  .eventDisplay .wrapper {
+    height: calc(100vh - 375px);
+  }
+  .calendar {
+    height: 80px;
+    background-image: url('../assets/hieroglyphics.jpg');
+    background-size: contain;
+  }
+  .calendarIcon button,
+  input#calendar {
+    bottom: 80px;
+  }
+  .parchment {
+    top: 150px;
+    height: 60%;
+  }
+  .calendarNav {
+    top: calc(210px - 100vh);
+  }
+  .calendarDisplay {
+    top: calc(270px - 100vh);
+  }
+}
