@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import stockImage from './assets/medieval2.jpg';
 import waxSeal from './assets/waxSeal.png';
-import wingedBeing from './assets/wingedBeing.png';
-import eyeOfHorus from './assets/eyeOfHorus.jpg';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as rHeart } from '@fortawesome/free-regular-svg-icons';
@@ -29,21 +27,18 @@ class EventDisplay extends Component {
     }
     renderInformationTab(heartIcon) {
         return(
-            <div className="Information">
-                <div>
+            <div className="information">
+                <div className="about">
                     <h3>About</h3>
                     <p>A web development bootcamp project. Built with React and Firebase.</p>
                 </div>
-                <div>
+                <div className="navigation">
                     <h3>Navigation</h3>
-                    <p><span>previous</span><span>event</span></p>
-                    <p><span>open</span><span>calendar</span></p>
-                    <p><span>next</span><span>event</span></p>
-                    <img src={wingedBeing} alt="previous event" className="previousEvent"/>
-                    <img src={eyeOfHorus} alt="open calendar" className="icon"/>
-                    <img src={wingedBeing} alt="next event" className="nextEvent"/>
                     <i>{heartIcon}</i>
-                    <p>Like and save an event</p>
+                    <p className="likeButtonDescription">Like and save a historical event</p>
+                    <p><span>previous</span><span>event</span><span></span></p>
+                    <p><span>open</span><span>calendar</span><span></span></p>
+                    <p><span>next</span><span>event</span><span></span></p>
                 </div>
             </div>
         )
@@ -53,17 +48,17 @@ class EventDisplay extends Component {
         const farHeart = <FontAwesomeIcon icon={rHeart} />;
         return(
             <div className="icons">
-                <label htmlFor="moreInformation" className="srOnly"></label>
-                <input type="checkbox" name="moreInformation" id="moreInformation"/>
+                <label htmlFor="moreInformation" className="srOnly">more information</label>
+                <input type="checkbox" name="moreInformation" id="moreInformation" />
                 {
-                    this.renderInformationTab(farHeart)
+                    this.renderInformationTab(fasHeart)
                 }
                 <img src={waxSeal} alt="more information" className="informationIcon"/>
-                <p className="information">i</p>
+                <p className="informationSymbol">i</p>
                 <div className="likeIcon">
-                    <label htmlFor="likeButton" className="srOnly"></label>
+                    <label htmlFor="likeButton" className="srOnly">Like and save the historical event as one of your favourites</label>
                     <input type="checkbox" name="likeButton" id="likeButton"/>
-                    <i>{farHeart}</i>
+                    <i>{farHeart}</i>                          
                     <i className="liked">{fasHeart}</i>
                 </div>
             </div>

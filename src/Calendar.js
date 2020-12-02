@@ -70,14 +70,14 @@ class Calendar extends Component {
     }
     calendarEntry(day, index, today, callbackFunction) {
         return (
-            <li
+            <button
                 key={index}
                 className={`dayInMonth ${today}`}
                 onClick={ callbackFunction }
             >
                 <span>{day.charAt(0)}</span>
                 <span>{day.charAt(1)}</span>
-            </li>
+            </button>
         )
     } 
     getUserChosenDate(year, month, day) {
@@ -170,11 +170,15 @@ class Calendar extends Component {
     renderCalendarIcon() {
         return(
             <div className="calendarIcon">
-                <img src={wingedBeing} alt="previous event" className="previousEvent"
-                    onClick={() => this.changeEvent(-1)} />
-                <img src={wingedBeing} alt="next event" className="nextEvent"
-                    onClick={() => this.changeEvent(1)} />
-                <img src={eyeOfHorus} alt="select a date" className="icon"/>
+                <button className="previousEvent" onClick={() => this.changeEvent(-1)} >
+                    <img src={wingedBeing} alt="previous event" />
+                </button>
+                <button className="icon">
+                    <img src={eyeOfHorus} alt="select a date" />
+                </button>       
+                <button className="nextEvent" onClick={() => this.changeEvent(1)} >
+                    <img src={wingedBeing} alt="next event" />
+                </button>
             </div>
         )
     }
@@ -194,11 +198,13 @@ class Calendar extends Component {
                 }
                 <img src={parchment} alt="parchment background" className="parchment hidden"/>
                 <div className="calendarNav hidden">
-                    <img src={ arrow } alt="previous month" className="leftArrow" 
-                         onClick={ () => this.previousMonth(chosenYear, chosenMonth) }/>
+                    <button className="leftArrow" onClick={() => this.previousMonth(chosenYear, chosenMonth)}>
+                        <img src={ arrow } alt="previous month" />
+                    </button>
                     <h3>{ months[chosenMonth] + ' ' + chosenYear }</h3>
-                    <img src={arrow} alt="previous month" className="rightArrow" 
-                         onClick={() => this.nextMonth(chosenYear, chosenMonth)} />
+                    <button className="rightArrow" onClick={() => this.nextMonth(chosenYear, chosenMonth)}>
+                        <img src={arrow} alt="previous month" />
+                    </button>
                 </div>
                 <div className="calendarDisplay hidden">
                     {
