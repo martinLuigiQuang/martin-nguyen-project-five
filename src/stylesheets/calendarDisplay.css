@@ -66,13 +66,34 @@
   background-color: coral;
 }
 
-button.dayInMonth {
+.dayInMonth.selected {
+  background-color: gold;
+}
+
+label.dayInMonth {
+  display: grid;
   font-size: 2rem;
-  grid-template-columns: repeat(2, 40%);
+  grid-template-columns: repeat(2, 35%);
   height: calc((100vw - 60px) / 8);
   justify-content: center;
   align-content: center;
   border-radius: 20%;
+}
+
+input[type="radio"] {
+    appearance: none;
+}
+
+button.submitButton {
+    position: absolute;
+    bottom: -50px;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 30px;
+    background-color: rgb(67, 229, 169);
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
 }
 
 .hidden {

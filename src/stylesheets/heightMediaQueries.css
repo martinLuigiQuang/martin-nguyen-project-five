@@ -1,4 +1,4 @@
-@media (max-height: 567px) {
+@media (max-height: 400px) {
   header, footer,
   .eventDisplay, .calendar {
     display: none;
@@ -15,38 +15,71 @@
   .calendarDisplay {
     top: calc(225px - 100vh);
   }
+  .parchment{
+    height: 72vh;
+  }
+  .about {
+    padding-bottom: 35px;
+  }
+  .navigation {
+    padding-top: 50px;
+  }
+  button.submitButton {
+      bottom: -100px;
+  }
+}
+
+@media (min-height: 736px) {
+  button.submitButton {
+    bottom: -130px;
+  }
+  .navigation {
+    grid-template-rows: 1fr 1fr 2fr;
+  }
+  .navigation p:not(.likeButtonDescription) {
+      font-size: 2.2rem;
+    grid-template-rows: 1fr 1fr 4fr;
+  }
 }
 
 @media (min-height: 812px) {
-  header {
-    height: 125px;
-  }
-  header img {
-    width: 250px;
-  }
   .eventDisplay {
     top: 175px;
   }
   .eventDisplay .wrapper {
     height: calc(100vh - 375px);
   }
-  .calendar {
-    height: 80px;
-    background-image: url('../assets/hieroglyphics.jpg');
-    background-size: contain;
-  }
-  .calendarIcon button,
+  .calendarIcon,
   input#calendar {
     bottom: 80px;
   }
+  input#calendar:checked {
+    height: 210px;
+    bottom: -50px;
+  }
   .parchment {
-    top: 150px;
-    height: 60%;
+    top: calc(200px - 100vh);
+    height: 60vh;
   }
   .calendarNav {
     top: calc(210px - 100vh);
   }
+  .calendarNav h3 {
+      flex-basis: 150px;
+      font-size: 2.5rem;
+  }
   .calendarDisplay {
     top: calc(270px - 100vh);
+  }
+  button.submitButton {
+      bottom: -100px;
+  }
+  footer .image {
+      position: absolute;
+      bottom: 50px;
+      width: 100vw;
+      height: 80px;
+      background-image: url(../assets/hieroglyphs.jpg);
+      background-size: contain;
   }
 }

@@ -11,9 +11,8 @@ class Calendar extends Component {
         this.state = {
             today: new Date(),
             calendarDate: new Date(),
-            chosenDate: new Date(),
-            aDateIsPicked: false,
             eventNav: 0,
+            choiceMade: false,
             isChecked: false,
             savedDates: [],
             monthCalendar: []
@@ -80,35 +79,60 @@ class Calendar extends Component {
                  date.getMonth() === this.state.today.getMonth() && 
                  parseInt(day) === this.state.today.getDate() )
     }
+    // Check if the input day is the user's selected date; the purpose is to hightlight it
+    checkChosenDay(day) {
+        if (this.state.calendarDate !== this.state.today) {
+            return (parseInt(day) === this.state.calendarDate.getDate());
+        } else {
+            return false;
+        }
+    }
     // To render the calendar entries on screen; callback function parameter to record user's date pick
-    calendarEntry(day, index, today, callbackFunction) {
+    calendarEntry(day, index, today) {
         return (
-            <button
+            <label
                 key={index}
+                htmlFor={index}
                 className={`dayInMonth ${today}`}
-                onClick={ callbackFunction }
             >
                 <span>{day.charAt(0)}</span>
                 <span>{day.charAt(1)}</span>
-            </button>
+                <input type="radio" name="day" value={day} id={index}/>
+            </label>
         )
     } 
     // Update the state of the component when the user selects a date
-    getUserChosenDate(calendarYear, calendarMonth, chosenDay) {
-        // chosenDate variable to set the component state and to be passed to App.js Component to update Header.js Component
-        const chosenDate = new Date(calendarYear, calendarMonth, chosenDay);
-        this.setState({
-            aDateIsPicked: true,
-            isChecked: !this.state.isChecked,
-            chosenDate: chosenDate
-        });
+    getUserChosenDate(event) {
+        const chosenDay = event.target.value;
+        if (chosenDay) {
+            const calendarMonth = this.state.calendarDate.getMonth();
+            const calendarYear = this.state.calendarDate.getFullYear();
+            // Pass chosenDate to App.js Component to make a new api call and update Header.js Component
+            const chosenDate = new Date(calendarYear, calendarMonth, chosenDay);
+            this.setState({
+                calendarDate: chosenDate,
+                choiceMade: true
+            });
+        }
     }
-    // Callback function to return to the current month and reset the calendar display
-    reset() {
-        console.log('checked')
+    // Handle form submit and pass user's chosen date to App.js Component
+    handleSubmit(event) {
+        event.preventDefault();
+        if (this.state.choiceMade) {
+            this.setState({
+                isChecked: !this.state.isChecked
+            })
+            // Pass boolean variable dateSelected to App.js Component to start a new api call and reset eventIndex 
+            const dateSelected = true;
+            this.props.onDatePick(this.state.calendarDate, dateSelected);
+        }
+    }
+    // Callback function to return to the current month and toggle the calendar display
+    toggleCalendarDisplay() {
         this.setState({
             calendarDate: this.state.today,
             monthCalendar: this.fillCalendar(this.state.today),
+            choiceMade: false,
             isChecked: !this.state.isChecked
         });
     }
@@ -128,23 +152,17 @@ class Calendar extends Component {
             monthCalendar: this.fillCalendar(newCalendarDate)
         });
     }
-    //  Callback function to allow the user to navigate through the events
-    changeEvent(change) {
-        this.setState({
-            eventNav: change
-        })
-    }
     // Render the calendar icon and event nav icons
     renderCalendarIcon() {
         return (
             <div className="calendarIcon">
-                <button className="previousEvent" onClick={() => this.changeEvent(-1)} >
+                <button className="previousEvent" onClick={() => this.props.onEventChange(-1)} >
                     <img src={wingedBeing} alt="previous event" />
                 </button>
                 <div className="icon">
                     <img src={eyeOfHorus} alt="select a date" />
                 </div>
-                <button className="nextEvent" onClick={() => this.changeEvent(1)} >
+                <button className="nextEvent" onClick={() => this.props.onEventChange(1)} >
                     <img src={wingedBeing} alt="next event" />
                 </button>
             </div>
@@ -167,7 +185,11 @@ class Calendar extends Component {
     // Redner the calendar display
     renderCalendarDisplay(calendarDate, calendarYear, calendarMonth) {
         return(
-            <div className="calendarDisplay hidden">
+            <form 
+                className="calendarDisplay hidden"
+                onSubmit={(event) => this.handleSubmit(event)}
+                onChange={(event) => this.getUserChosenDate(event)}
+            >
                 {
                     daysInAWeek.map((day) => {
                         return this.displayDayInAWeek(day);
@@ -175,16 +197,19 @@ class Calendar extends Component {
                 }
                 {
                     this.state.monthCalendar.map((day, index) => {
-                        let entry = this.calendarEntry(day, index, '', () => this.getUserChosenDate(calendarYear, calendarMonth, day));
+                        let entry = this.calendarEntry(day, index, '');
                         if (day === '') {
                             entry = this.calendarEntry(day, index, '');
                         } else if (this.checkToday(calendarDate, day)) {
-                            entry = this.calendarEntry(day, index, 'today', () => this.getUserChosenDate(calendarYear, calendarMonth, day));
+                            entry = this.calendarEntry(day, index, 'today');
+                        } else if (this.checkChosenDay(day)) {
+                            entry = this.calendarEntry(day, index, 'selected');
                         }
                         return entry;
                     })
                 }
-            </div>
+                <button className="submitButton">Select</button>
+            </form>
         )
     }
     
@@ -192,22 +217,6 @@ class Calendar extends Component {
         this.setState({
             monthCalendar: this.fillCalendar(this.state.today)
         });
-    }
-
-    // componentDidUpdate() to pass the specified states of Calendar component to the onChange props of <Calendar /> in App.js Component
-    componentDidUpdate() {
-        if (this.state.aDateIsPicked) {
-            this.props.onUserChange(this.state.chosenDate, this.state.aDateIsPicked, this.state.eventNav);
-            this.setState({
-                aDateIsPicked: false
-            });
-        }
-        if (this.state.eventNav) {
-            this.props.onUserChange(this.state.chosenDate, this.state.aDateIsPicked, this.state.eventNav);
-            this.setState({
-                eventNav: 0
-            });
-        }
     }
     
     render() {
@@ -220,7 +229,7 @@ class Calendar extends Component {
                 <label htmlFor="calendar" className="srOnly">Choose a day</label>
                 <input type="checkbox" name="calendar" id="calendar"
                     checked={this.state.isChecked}
-                    onChange={() => this.reset()}
+                    onChange={() => this.toggleCalendarDisplay()}
                 />
                 {
                     this.renderCalendarIcon()

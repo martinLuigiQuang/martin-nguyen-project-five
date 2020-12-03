@@ -6,11 +6,22 @@
 }
 
 .parchment {
-  position: fixed;
+  position: absolute;
   width: 110%;
-  height: 70%;
-  top: 110px;
+  height: 70vh;
+  top: calc(160px - 100vh);
   left: -15px;
+}
+
+.calendarIcon {
+  position: absolute;
+  left: 25px;
+  bottom: -15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  height: 80px;
+  width: calc(100vw - 50px);
 }
 
 .calendarIcon img,
@@ -19,7 +30,6 @@
 input#calendar{
   width: 80px;
   height: 80px;
-  left: calc(50% - 40px);
   border-radius: 10px;
   z-index: 3;
 }
@@ -29,19 +39,8 @@ input#calendar{
   background-color: rgba(128, 128, 128, 0);
 }
 
-.icon,
-.calendarIcon button,
-input#calendar {
-  position: absolute;
-  bottom: -15px;
-}
-
 .previousEvent {
-  transform: translateX(-90px) rotateY(180deg);
-}
-
-.nextEvent {
-  transform: translateX(90px);
+  transform: rotateY(180deg);
 }
 
 .icon img {
@@ -49,6 +48,9 @@ input#calendar {
 }
 
 input#calendar {
+  position: absolute;
+  left: calc(50% - 40px);
+  bottom: -15px;
   z-index: 4;
   appearance: none;
 }

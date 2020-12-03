@@ -21,12 +21,11 @@ class App extends Component {
     }
   }
 
-  setUserChosenDate(date, picked, change) {
+  setUserChosenDate(date, picked) {
     this.setState({
       chosenDate: date,
       aDateIsPicked: picked
     });
-    this.getNewEvent(change);
   }
 
   getNewEvent(change) {
@@ -91,7 +90,10 @@ class App extends Component {
           </div> {/* closing wrapper */}
         </section> {/* closing eventDisplay */}
 
-        <Calendar onUserChange={ (date, picked, change) => this.setUserChosenDate(date, picked, change) }/>
+        <Calendar 
+          onDatePick={ (date, picked) => this.setUserChosenDate(date, picked) }
+          onEventChange={ (change) => this.getNewEvent(change) }
+        />
         <Footer />
       </div> /* closing App */
     );
