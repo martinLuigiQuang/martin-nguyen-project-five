@@ -1,0 +1,74 @@
+.information {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 100px;
+  width: 100vw;
+  height: calc(100vh - 150px);
+  display: none;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  background-color: wheat;
+}
+
+header .information h3 {
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.about {
+  display: flex;
+  flex-flow: column nowrap;
+  border-bottom: 5px solid whitesmoke;
+  padding-bottom: 20px;
+}
+
+.fineprints {
+    font-size: 1.6rem;
+}
+
+.navigation {
+  width: calc(100vw - 50px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 10px;
+  padding-top: 20px;
+}
+
+.navigation h3 {
+  grid-column: 1/ span 3;
+}
+
+.navigation p:not(.likeButtonDescription) {
+  display: grid;
+  grid-template-rows: 1fr 1fr 3fr;
+  border-top: 2px solid goldenrod;
+  background: linear-gradient(gold, wheat);
+}
+
+.navigation img {
+  width: 80px;
+  height: 80px;
+  transform: none;
+}
+
+.navigation .previousEvent {
+  transform: rotateY(180deg);
+}
+
+.navigation .icon {
+  border: 5px solid gold;
+}
+
+.navigation .fa-heart {
+  font-size: 2.5rem;
+  color: tomato;
+}
+
+.likeButtonDescription {
+  grid-column: 2 / span 2;
+  text-align: left;
+}
