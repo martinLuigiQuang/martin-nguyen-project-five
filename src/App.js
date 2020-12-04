@@ -3,7 +3,7 @@ import firebase from './firebase';
 import axios from 'axios';
 import Header from './Header';
 import Calendar from './Calendar';
-import EventDisplay from './EventDisplay';
+import EventDisplay from './EventDisplay.js';
 import Footer from './Footer';
 import './App.css';
 

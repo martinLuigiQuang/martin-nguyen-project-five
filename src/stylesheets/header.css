@@ -37,3 +37,14 @@ header img.secondPiece {
   right: -50px;
   transform: rotateY(180deg) rotateZ(160deg);
 }
+
+.headerImageContainer {
+  position: absolute;
+  top: 100px;
+  height: 50px;
+  width: 100vw;
+  background-image: url(../assets/stoneMotif.jpg);
+  background-size: contain;
+  background-position: 50%;
+  z-index: 1;
+}

@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { months, daysInAWeek } from './calendarInfo';
 import arrow from './assets/arrow.png';
 import eyeOfHorus from './assets/eyeOfHorus.jpg';
-import parchment from './assets/parchment.png';
 import wingedBeing from './assets/wingedBeing.png';
 
 class Calendar extends Component {
@@ -68,7 +67,7 @@ class Calendar extends Component {
     // Display the names of the days in a week; shorten the names for narrow screens
     displayDayInAWeek(day) {
         let checkedDay = day;
-        if (window.outerWidth < 500) {
+        if (window.innerWidth < 1500) {
             checkedDay = day.charAt(0);
         }
         return (<li key={day}>{checkedDay}</li>)
@@ -86,20 +85,6 @@ class Calendar extends Component {
         } else {
             return false;
         }
-    }
-    // To render the calendar entries on screen; callback function parameter to record user's date pick
-    calendarEntry(day, index, today) {
-        return (
-            <label
-                key={index}
-                htmlFor={index}
-                className={`dayInMonth ${today}`}
-            >
-                <span>{day.charAt(0)}</span>
-                <span>{day.charAt(1)}</span>
-                <input type="radio" name="day" value={day} id={index}/>
-            </label>
-        )
     } 
     // Update the state of the component when the user selects a date
     getUserChosenDate(event) {
@@ -138,19 +123,49 @@ class Calendar extends Component {
     }
     // Callback function that allows the user to navigate the calendar
     changeMonth(calendarYear, calendarMonth, change) {
-        calendarMonth += change;
-        if (calendarMonth > 11) {
-            calendarMonth = 0;
-            calendarYear++;
-        } else if (calendarMonth < 0) {
-            calendarMonth = 11;
-            calendarYear--;
+        if (window.innerHeight > 500) {
+            calendarMonth += change;
+            if (calendarMonth > 11) {
+                calendarMonth = 0;
+                calendarYear++;
+            } else if (calendarMonth < 0) {
+                calendarMonth = 11;
+                calendarYear--;
+            }
+            const newCalendarDate = new Date(calendarYear, calendarMonth);
+            this.setState({
+                calendarDate: newCalendarDate,
+                monthCalendar: this.fillCalendar(newCalendarDate)
+            });
+        } else {
+            this.changeDate(calendarYear, calendarMonth, change);
         }
-        const newCalendarDate = new Date(calendarYear, calendarMonth);
+    }
+    // Allow user to navigate the calendar on a short viewport
+    changeDate(calendarYear, calendarMonth, change) {
+        const numOfDaysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+        let chosenDay = this.state.calendarDate.getDate();
+        chosenDay += change;
+        if (chosenDay > numOfDaysInMonth) {
+            calendarMonth++;
+            if (calendarMonth > 11) {
+                calendarMonth = 0;
+                calendarYear++;
+            }
+        } else if (chosenDay < 1) {
+            calendarMonth--;
+            if (calendarMonth < 0) {
+                calendarMonth = 11;
+                calendarYear--;
+            }
+        }
+        const newCalendarDate = new Date(calendarYear, calendarMonth, chosenDay);
+        const dateSelected = true;
         this.setState({
             calendarDate: newCalendarDate,
             monthCalendar: this.fillCalendar(newCalendarDate)
         });
+        this.props.onDatePick(this.state.calendarDate, dateSelected);
     }
     // Render the calendar icon and event nav icons
     renderCalendarIcon() {
@@ -179,6 +194,22 @@ class Calendar extends Component {
                 <button className="rightArrow" onClick={() => this.changeMonth(calendarYear, calendarMonth, 1)}>
                     <img src={arrow} alt="previous month" />
                 </button>
+            </div>
+        )
+    }
+    // To render the calendar entries on screen; callback function parameter to record user's date pick
+    calendarEntry(day, index, today) {
+        return (
+            <div key={index} className="dayEntry">
+                <label htmlFor={index} className={`dayInMonth ${today}`}>
+                    <span>{day.charAt(0)}</span>
+                    <span>{day.charAt(1)}</span>    
+                </label>
+                {
+                    day 
+                    ? <input type="radio" name="day" value={day} id={index}/>
+                    : null
+                }
             </div>
         )
     }
@@ -234,14 +265,16 @@ class Calendar extends Component {
                 {
                     this.renderCalendarIcon()
                 }
-                {/* Background image */}
-                <img src={parchment} alt="parchment background" className="parchment hidden" />
-                {
-                    this.renderCalendarNav(calendarYear, calendarMonth)
-                }
-                {
-                    this.renderCalendarDisplay(calendarDate, calendarYear, calendarMonth)
-                }
+                <section className="mainDisplay hidden">
+                    {/* Background image */}
+                    {/* <img src={parchment} alt="parchment background" className="parchment hidden" /> */}
+                    {
+                        this.renderCalendarNav(calendarYear, calendarMonth)
+                    }
+                    {
+                        this.renderCalendarDisplay(calendarDate, calendarYear, calendarMonth)
+                    }
+                </section>
             </div>
         )
     }

@@ -1,33 +1,260 @@
-@media (min-width: 410px) {
-  header img {
-    width: 250px;
-  }
-  .parchment {
-    left: -20px;
+@media (min-width: 500px) {
+  header img.firstPiece,
+  header img.secondPiece {
+    width: 300px;
   }
   .calendarNav h3 {
     font-size: 2.5rem;
     flex-basis: 150px;
   }
-  .calendarNav button {
-    width: 40px;
-    height: 40px;
+  .event img {
+    height: 30vw;
+    width: 30vw;
   }
-  button.dayInMonth {
-    height: 50px;
+}
+
+@media (min-width: 540px) and (orientation: landscape) {
+  .calendarDisplay {
+    grid-template-columns: repeat(7, 8vw);
+  }
+  label.dayInMonth {
+    height: 4vw;
+  }
+  .eventDisplay {
+    height: calc(100vh - 230px);
+  }
+  .event {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .event img {
+    width: 220px;
+    height: 220px;
+  }
+  .eventDescription {
+    padding-left: 50px;
+    height: 220px;
+    width: calc(100vw - 150px)
   }
 }
 
 @media (min-width: 768px) {
+  .eventDisplay {
+    height: calc(100vh - 430px);
+  }
+  .eventDisplay .wrapper {
+    width: calc(100vw - 200px);
+  }
+  p.informationSymbol {
+    top: 15px;
+    right: 35px;
+    font-size: 3rem;
+  }
+  .icons {
+    width: 80px;
+    height: 80px;
+  }
+  .navigation {
+    width: 500px;
+  }
+  .calendarIcon {
+    left: calc(50vw - 250px);
+    width: 500px;
+    height: 120px;
+  }
+  .calendarIcon .icon,
+  .previousEvent,
+  .nextEvent,
+  .calendarIcon img {
+    width: 120px;
+    height: 120px;
+    bottom: 100px;
+  }
+  input#calendar {
+    left: calc(50% - 60px);
+    bottom: 0;
+    width: 120px;
+    height: 120px;
+  }
+  input#calendar:checked {
+    height: 250px;
+  }
+  .calendarNav {
+    margin-top: 20px;
+    margin-left: 100px;
+  }
+  .leftArrow, .leftArrow img,
+  .rightArrow, .rightArrow img {
+    height: 50px;
+    width: 50px;
+  }
+  label.dayInMonth {
+    grid-template-columns: repeat(2, 25%);
+    height: 7vw;
+  }
+  button.submitButton {
+    bottom: 120px;
+    height: 40px;
+    width: 120px;
+  }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+  html {
+    font-size: 75%;
+  }
+  p.informationSymbol {
+    font-size: 3rem;
+  }
+  .icons {
+    width: 80px;
+    height: 80px;
+  }
   .eventDisplay img {
     width: 30vw;
     height: 30vw;
   }
-  .calendarIcon img,
+}
+
+@media (min-width: 768px) and (max-height: 500px) {
+  .calendarNav {
+    width: 180px;
+    left: calc(50% - 190px);
+    top: -140px;
+  }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .eventDisplay {
+    height: calc(100vh - 330px);
+  }
+  .event {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .event img {
+    width: 250px;
+    height: 250px;
+  }
+  .eventDescription {
+    padding-left: 50px;
+    height: 250px;
+    width: calc(100vw - 150px)
+  }
+  .calendar {
+    width: 50vw;
+    left: 25vw;
+  }
+  .mainDisplay {
+    height: calc(100vh - 230px);
+  }
+  .calendarIcon{
+    left: auto;
+    width: 50vw;
+  }
   input#calendar {
-    width: 150px;
-    height: 150px;
-    left: calc(50% - 75px);
+    bottom: -15px;
+  }
+  input#calendar:checked {
+    height: 155px;
+    left: -25vw;
+  }
+  .calendarNav {
+    margin-top: 15px;
+  }
+  .calendarNav h3 {
+    flex-basis: 250px;
+  }
+  .calendarDisplay {
+    grid-template-columns: repeat(7, 5vw);
+  }
+  .calendarDisplay li {
+    height: auto;
+  }
+  label.dayInMonth {
+    grid-template-columns: repeat(2, 25%);
+    height: 4vw;
+  }
+  button.submitButton {
     bottom: 100px;
+  }
+  footer .image {
+    position: absolute;
+    bottom: 50px;
+    width: 100vw;
+    height: 80px;
+    background-image: url(../assets/hieroglyphs.jpg);
+    background-size: contain;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 100%;
+  }
+  header {
+    height: 150px;
+  }
+  .eventDisplay {
+    top: 200px;
+  }
+  .headerImageContainer {
+    top: 150px;
+  }
+  p.informationSymbol {
+    top: 105px;
+    right: 95px;
+    font-size: 3rem;
+  }
+  .icons img.informationIcon,
+  input#moreInformation {
+    right: 50px;
+    top: 90px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 1024px) and (orientation: portrait) {
+  .calendar {
+    height: calc(100vh - 280px);
+    top: 150px;
+  }
+  .calendarNav h3 {
+    flex-basis: 200px;
+  }
+  label.dayInMonth {
+    height: 60px;
+  }
+  button.submitButton {
+    width: 150px;
+    height: 50px;
+    top: 530px;
+  }
+  .navigation {
+    height: 40vh;
+  }
+}
+
+@media (min-width: 1366px) {
+  .calendarDisplay li {
+    margin: 50px 0 20px;
+  }
+  .calendarNav h3 {
+    flex-basis: 250px;
+  }
+  input#calendar {
+    bottom: 0;
+  }
+  input#calendar:checked {
+    height: 250px;
+  }
+  button.submitButton {
+    bottom: 100px
+  }
+  .navigation {
+    width: 50vw;
   }
 }

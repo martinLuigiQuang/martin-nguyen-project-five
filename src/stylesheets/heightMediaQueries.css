@@ -1,78 +1,106 @@
-@media (max-height: 400px) {
-  header, footer,
-  .eventDisplay, .calendar {
+@media (max-height: 500px) {
+  header h3 {
+    z-index: 50;
+  }
+  header img.firstPiece,
+  header img.secondPiece {
+    z-index: 0;
+  }
+  .event img, 
+  .calendarDisplay,
+  .calendarNav h3,
+  input#calendar,
+  .icons {
     display: none;
+  }
+  .calendarIcon .icon {
+    visibility: hidden;
+  }
+  .mainDisplay {
+    background: none;
+  }
+  .calendarNav {
+    position: absolute;
+    top: -95px;
+    left: calc(50% - 90px);
+    justify-content: center;
+    width: 120px;
+    justify-content: space-between;
+  }
+  .event .eventDescription {
+    z-index: 100;
+    width: 40vw;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .hidden {
+    z-index: 1;
   }
 }
 
-@media (min-height: 570px) {
-  .eventDisplay {
-    top: 130px;
-  }
-  .calendarNav {
-    top: calc(170px - 100vh);
-  }
-  .calendarDisplay {
-    top: calc(225px - 100vh);
-  }
-  .parchment{
-    height: 72vh;
-  }
+
+@media (min-height: 653px) {
   .about {
     padding-bottom: 35px;
   }
-  .navigation {
-    padding-top: 50px;
+  .calendarNav {
+    margin-top: 20px;
   }
-  button.submitButton {
-      bottom: -100px;
+  .calendarDisplay li {
+    margin: 30px 0 10px;
   }
 }
 
-@media (min-height: 736px) {
-  button.submitButton {
-    bottom: -130px;
+@media (min-height: 720px) {
+  .event {
+    grid-template-rows: calc(40vw) calc(100% - 40vw); 
+  }
+  .event img {
+    margin: 25px auto;
   }
   .navigation {
-    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-rows: auto 1fr;
+    height: 35vh;
   }
   .navigation p:not(.likeButtonDescription) {
-      font-size: 2.2rem;
-    grid-template-rows: 1fr 1fr 4fr;
+    font-size: 2.2rem;
+    background: linear-gradient(gold, wheat);
+  }
+  button.submitButton {
+    bottom: 150px;
+  }
+  .infoImageContainer {
+    display: flex;
+    width: 15vh;
+    height: 30vh;
   }
 }
 
-@media (min-height: 812px) {
-  .eventDisplay {
-    top: 175px;
+@media (min-height: 950px) {
+  .navigation {
+    height: 28vh;
   }
-  .eventDisplay .wrapper {
-    height: calc(100vh - 375px);
+  .information {
+    bottom: 130px;
+    height: calc(100vh - 280px);
+  }
+  .calendar {
+    height: calc(100vh - 230px);
   }
   .calendarIcon,
   input#calendar {
-    bottom: 80px;
+    bottom: 0px;
   }
   input#calendar:checked {
     height: 210px;
-    bottom: -50px;
-  }
-  .parchment {
-    top: calc(200px - 100vh);
-    height: 60vh;
-  }
-  .calendarNav {
-    top: calc(210px - 100vh);
+    bottom: -130px;
   }
   .calendarNav h3 {
       flex-basis: 150px;
       font-size: 2.5rem;
   }
   .calendarDisplay {
-    top: calc(270px - 100vh);
-  }
-  button.submitButton {
-      bottom: -100px;
+    top: 15%;
   }
   footer .image {
       position: absolute;
