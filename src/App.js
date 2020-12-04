@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import firebase from './firebase';
 import axios from 'axios';
 import Header from './Header';
 import Calendar from './Calendar';
