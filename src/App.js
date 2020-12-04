@@ -40,16 +40,6 @@ class App extends Component {
     });
   }
 
-  setUpDataBase() {
-    // Make reference to database
-    const dbRef = firebase.database().ref();
-    // Get data from database
-    let firebaseDataObj;
-    dbRef.on('value', (data) => {
-      firebaseDataObj = data.val();
-    });
-  }
-
   apiCall() {
     axios({
       url: `${this.proxyUrl}http://history.muffinlabs.com/date/${this.state.chosenDate.getMonth() + 1}/${this.state.chosenDate.getDate()}`,
@@ -59,11 +49,10 @@ class App extends Component {
       this.setState({
         events: response.data.data.Events
       });
-    });
+    }).catch( err => console.log(err) );
   }
 
   componentDidMount() {
-    this.setUpDataBase();
     this.apiCall();
   }
 
