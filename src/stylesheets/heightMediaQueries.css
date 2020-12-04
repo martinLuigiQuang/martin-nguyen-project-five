@@ -1,11 +1,14 @@
 @media (max-height: 500px) {
   header h3 {
+    position: absolute;
     z-index: 50;
+    top: -30px;
   }
   header img.firstPiece,
   header img.secondPiece {
     z-index: 0;
   }
+  header h1,
   .event img, 
   .calendarDisplay,
   .calendarNav h3,
@@ -28,10 +31,12 @@
     justify-content: space-between;
   }
   .event .eventDescription {
-    z-index: 100;
-    width: 40vw;
+    z-index: 3;
+    width: 45vw;
+    height: 35vh;
     margin: 0 auto;
     padding: 0;
+    background-color: rgba(0, 255, 255, 0.388);
   }
   .hidden {
     z-index: 1;
