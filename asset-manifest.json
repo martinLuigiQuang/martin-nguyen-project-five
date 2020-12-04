@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/martin-nguyen-project-five/static/css/main.60bd2b93.chunk.css",
+    "main.css": "/martin-nguyen-project-five/static/css/main.8a3e5015.chunk.css",
     "main.js": "/martin-nguyen-project-five/static/js/main.c3b8bf4c.chunk.js",
     "main.js.map": "/martin-nguyen-project-five/static/js/main.c3b8bf4c.chunk.js.map",
     "runtime-main.js": "/martin-nguyen-project-five/static/js/runtime-main.10ee2636.js",
@@ -10,7 +10,7 @@
     "static/js/3.e9e063a2.chunk.js": "/martin-nguyen-project-five/static/js/3.e9e063a2.chunk.js",
     "static/js/3.e9e063a2.chunk.js.map": "/martin-nguyen-project-five/static/js/3.e9e063a2.chunk.js.map",
     "index.html": "/martin-nguyen-project-five/index.html",
-    "static/css/main.60bd2b93.chunk.css.map": "/martin-nguyen-project-five/static/css/main.60bd2b93.chunk.css.map",
+    "static/css/main.8a3e5015.chunk.css.map": "/martin-nguyen-project-five/static/css/main.8a3e5015.chunk.css.map",
     "static/js/2.ca0d8a64.chunk.js.LICENSE.txt": "/martin-nguyen-project-five/static/js/2.ca0d8a64.chunk.js.LICENSE.txt",
     "static/media/ancient.ad8761cc.jpg": "/martin-nguyen-project-five/static/media/ancient.ad8761cc.jpg",
     "static/media/arrow.ccd9f4d0.png": "/martin-nguyen-project-five/static/media/arrow.ccd9f4d0.png",
@@ -27,7 +27,7 @@
   "entrypoints": [
     "static/js/runtime-main.10ee2636.js",
     "static/js/2.ca0d8a64.chunk.js",
-    "static/css/main.60bd2b93.chunk.css",
+    "static/css/main.8a3e5015.chunk.css",
     "static/js/main.c3b8bf4c.chunk.js"
   ]
 }
