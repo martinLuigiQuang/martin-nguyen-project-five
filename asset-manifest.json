@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/martin-nguyen-project-five/static/css/main.8a3e5015.chunk.css",
-    "main.js": "/martin-nguyen-project-five/static/js/main.c3b8bf4c.chunk.js",
-    "main.js.map": "/martin-nguyen-project-five/static/js/main.c3b8bf4c.chunk.js.map",
-    "runtime-main.js": "/martin-nguyen-project-five/static/js/runtime-main.10ee2636.js",
-    "runtime-main.js.map": "/martin-nguyen-project-five/static/js/runtime-main.10ee2636.js.map",
-    "static/js/2.ca0d8a64.chunk.js": "/martin-nguyen-project-five/static/js/2.ca0d8a64.chunk.js",
-    "static/js/2.ca0d8a64.chunk.js.map": "/martin-nguyen-project-five/static/js/2.ca0d8a64.chunk.js.map",
-    "static/js/3.e9e063a2.chunk.js": "/martin-nguyen-project-five/static/js/3.e9e063a2.chunk.js",
-    "static/js/3.e9e063a2.chunk.js.map": "/martin-nguyen-project-five/static/js/3.e9e063a2.chunk.js.map",
+    "main.js": "/martin-nguyen-project-five/static/js/main.a318e120.chunk.js",
+    "main.js.map": "/martin-nguyen-project-five/static/js/main.a318e120.chunk.js.map",
+    "runtime-main.js": "/martin-nguyen-project-five/static/js/runtime-main.58794636.js",
+    "runtime-main.js.map": "/martin-nguyen-project-five/static/js/runtime-main.58794636.js.map",
+    "static/js/2.4d5b690c.chunk.js": "/martin-nguyen-project-five/static/js/2.4d5b690c.chunk.js",
+    "static/js/2.4d5b690c.chunk.js.map": "/martin-nguyen-project-five/static/js/2.4d5b690c.chunk.js.map",
+    "static/js/3.5fdfa8c5.chunk.js": "/martin-nguyen-project-five/static/js/3.5fdfa8c5.chunk.js",
+    "static/js/3.5fdfa8c5.chunk.js.map": "/martin-nguyen-project-five/static/js/3.5fdfa8c5.chunk.js.map",
     "index.html": "/martin-nguyen-project-five/index.html",
     "static/css/main.8a3e5015.chunk.css.map": "/martin-nguyen-project-five/static/css/main.8a3e5015.chunk.css.map",
-    "static/js/2.ca0d8a64.chunk.js.LICENSE.txt": "/martin-nguyen-project-five/static/js/2.ca0d8a64.chunk.js.LICENSE.txt",
+    "static/js/2.4d5b690c.chunk.js.LICENSE.txt": "/martin-nguyen-project-five/static/js/2.4d5b690c.chunk.js.LICENSE.txt",
     "static/media/ancient.ad8761cc.jpg": "/martin-nguyen-project-five/static/media/ancient.ad8761cc.jpg",
     "static/media/arrow.ccd9f4d0.png": "/martin-nguyen-project-five/static/media/arrow.ccd9f4d0.png",
     "static/media/baroqueFloral.d507c18a.png": "/martin-nguyen-project-five/static/media/baroqueFloral.d507c18a.png",
@@ -25,9 +25,9 @@
     "static/media/wingedBeing.2a6a3e5e.png": "/martin-nguyen-project-five/static/media/wingedBeing.2a6a3e5e.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.10ee2636.js",
-    "static/js/2.ca0d8a64.chunk.js",
+    "static/js/runtime-main.58794636.js",
+    "static/js/2.4d5b690c.chunk.js",
     "static/css/main.8a3e5015.chunk.css",
-    "static/js/main.c3b8bf4c.chunk.js"
+    "static/js/main.a318e120.chunk.js"
   ]
 }
