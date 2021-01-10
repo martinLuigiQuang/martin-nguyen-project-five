@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import firebase from './firebase';
 import axios from 'axios';
 import Header from './Header';
 import Calendar from './Calendar';
@@ -40,30 +39,20 @@ class App extends Component {
     });
   }
 
-  setUpDataBase() {
-    // Make reference to database
-    const dbRef = firebase.database().ref();
-    // Get data from database
-    let firebaseDataObj;
-    dbRef.on('value', (data) => {
-      firebaseDataObj = data.val();
-    });
-  }
-
   apiCall() {
     axios({
       url: `${this.proxyUrl}http://history.muffinlabs.com/date/${this.state.chosenDate.getMonth() + 1}/${this.state.chosenDate.getDate()}`,
       method: `GET`,
       responseType: `json`
     }).then((response) => {
+      console.log(response)
       this.setState({
         events: response.data.data.Events
       });
-    });
+    }).catch(err => console.log(err));
   }
 
   componentDidMount() {
-    this.setUpDataBase();
     this.apiCall();
   }
 
@@ -78,6 +67,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.events)
     return (
       <div className="App">
         <Header date={ this.state.chosenDate }/>

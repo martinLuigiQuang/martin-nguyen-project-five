@@ -266,8 +266,6 @@ class Calendar extends Component {
                     this.renderCalendarIcon()
                 }
                 <section className="mainDisplay hidden">
-                    {/* Background image */}
-                    {/* <img src={parchment} alt="parchment background" className="parchment hidden" /> */}
                     {
                         this.renderCalendarNav(calendarYear, calendarMonth)
                     }

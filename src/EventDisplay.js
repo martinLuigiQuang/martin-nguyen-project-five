@@ -30,10 +30,13 @@ const getEra = (year) => {
     } else if (year < 2000) {
         imageSrc = modern;
         altText = 'modern';
-    } else {
+    } else if (year >= 2000) {
         imageSrc = current;
         altText = 'current';
-    }
+    } else {
+        imageSrc = ancient;
+        altText = 'ancient';
+    };
     return [imageSrc, altText];
 }
 
