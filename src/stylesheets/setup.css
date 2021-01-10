@@ -14,7 +14,9 @@ html { font-size: 62.5%; }
   display: flex;
   flex-flow: column nowrap;
   height: 100vh;
+  min-height: 500;
   width: 100vw;
+  min-width: 320px;
   position: relative;
   justify-content: space-between;
   text-align: center;

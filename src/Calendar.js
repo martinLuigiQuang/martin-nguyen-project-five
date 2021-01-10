@@ -147,6 +147,7 @@ class Calendar extends Component {
         let chosenDay = this.state.calendarDate.getDate();
         chosenDay += change;
         if (chosenDay > numOfDaysInMonth) {
+            chosenDay = 1;
             calendarMonth++;
             if (calendarMonth > 11) {
                 calendarMonth = 0;
@@ -154,6 +155,7 @@ class Calendar extends Component {
             }
         } else if (chosenDay < 1) {
             calendarMonth--;
+            chosenDay = new Date(calendarYear, calendarMonth + 1, 0).getDate();
             if (calendarMonth < 0) {
                 calendarMonth = 11;
                 calendarYear--;
@@ -165,7 +167,7 @@ class Calendar extends Component {
             calendarDate: newCalendarDate,
             monthCalendar: this.fillCalendar(newCalendarDate)
         });
-        this.props.onDatePick(this.state.calendarDate, dateSelected);
+        this.props.onDatePick(newCalendarDate, dateSelected);
     }
     // Render the calendar icon and event nav icons
     renderCalendarIcon() {
@@ -214,7 +216,7 @@ class Calendar extends Component {
         )
     }
     // Redner the calendar display
-    renderCalendarDisplay(calendarDate, calendarYear, calendarMonth) {
+    renderCalendarDisplay(calendarDate) {
         return(
             <form 
                 className="calendarDisplay hidden"
@@ -270,7 +272,7 @@ class Calendar extends Component {
                         this.renderCalendarNav(calendarYear, calendarMonth)
                     }
                     {
-                        this.renderCalendarDisplay(calendarDate, calendarYear, calendarMonth)
+                        this.renderCalendarDisplay(calendarDate)
                     }
                 </section>
             </div>

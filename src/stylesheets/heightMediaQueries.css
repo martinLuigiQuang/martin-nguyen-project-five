@@ -28,10 +28,12 @@
     justify-content: space-between;
   }
   .event .eventDescription {
-    z-index: 100;
-    width: 40vw;
+    z-index: 3;
+    width: 45vw;
+    height: 35vh;
     margin: 0 auto;
     padding: 0;
+    flex-direction: column;
   }
   .hidden {
     z-index: 1;
