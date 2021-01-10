@@ -48,7 +48,7 @@ class App extends Component {
       this.setState({
         events: response.data.data.Events
       });
-    }).catch( err => console.log(err) );
+    }).catch(err => console.log(err));
   }
 
   componentDidMount() {
